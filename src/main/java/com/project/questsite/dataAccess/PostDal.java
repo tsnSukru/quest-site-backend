@@ -7,58 +7,58 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.questsite.entities.User;
+import com.project.questsite.entities.Post;
 
 import jakarta.persistence.EntityManager;
 
 @Repository
-public class UserDal implements IUserDal {
+public class PostDal implements IPostDal {
 
 	EntityManager entityManager;
 
 	@Autowired
-	public UserDal(EntityManager entityManager) {
+	public PostDal(EntityManager entityManager) {
 		// TODO Auto-generated constructor stub
 		this.entityManager = entityManager;
 	}
 
 	@Override
 	@Transactional
-	public List<User> getAll() {
+	public List<Post> getAll() {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
-		List<User> users = session.createQuery("from User", User.class).getResultList();
-		return users;
+		List<Post> posts = session.createQuery("from Post", Post.class).getResultList();
+		return posts;
 	}
 
 	@Override
-	public User getById(Long id) {
+	@Transactional
+	public Post getById(Long id) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
-		User user = session.get(User.class, id);
-		return user;
+		Post post = session.get(Post.class, id);
+		return post;
 	}
 
 	@Override
-	public void add(User user) {
+	@Transactional
+	public void add(Post post) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
-		session.merge(user);
+		session.merge(post);
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(Post post) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
-		session.merge(user);
+		session.merge(post);
 	}
 
 	@Override
-	public void delete(User user) {
+	public void delete(Post post) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
-		User userToDelete = session.get(User.class, user.getId());
-		session.remove(userToDelete);
+		session.remove(post);
 	}
-
 }

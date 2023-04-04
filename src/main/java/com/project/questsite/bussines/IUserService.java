@@ -5,7 +5,7 @@ import java.util.List;
 import com.project.questsite.entities.User;
 
 public interface IUserService {
-	List<User> GetAll();
+	List<User> getAll();
 
 	User getById(Long id);
 

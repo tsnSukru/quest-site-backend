@@ -24,12 +24,12 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@GetMapping("/user")
+	@GetMapping("/users")
 	public List<User> getAll() {
-		return userService.GetAll();
+		return userService.getAll();
 	}
 
-	@GetMapping("/user/{id}")
+	@GetMapping("/users/{id}")
 	public User getById(@PathVariable Long id) {
 		return userService.getById(id);
 	}

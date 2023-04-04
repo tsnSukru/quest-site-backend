@@ -6,52 +6,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.questsite.dataAccess.IUserDal;
-import com.project.questsite.entities.User;
+import com.project.questsite.dataAccess.IPostDal;
+import com.project.questsite.entities.Post;
 
 @Service
-public class UserManager implements IUserService {
+public class PostManager implements IPostService {
 
-	private IUserDal userDal;
+	IPostDal postDal;
 
 	@Autowired
-	public UserManager(IUserDal userDal) {
+	public PostManager(IPostDal postDal) {
 		// TODO Auto-generated constructor stub
-		this.userDal = userDal;
+		this.postDal = postDal;
 	}
 
 	@Override
 	@Transactional
-	public List<User> getAll() {
+	public List<Post> getAll() {
 		// TODO Auto-generated method stub
-		return userDal.getAll();
+		return postDal.getAll();
 	}
 
 	@Override
 	@Transactional
-	public User getById(Long id) {
+	public Post getById(Long id) {
 		// TODO Auto-generated method stub
-		return userDal.getById(id);
+		return postDal.getById(id);
 	}
 
 	@Override
 	@Transactional
-	public void add(User user) {
+	public void add(Post post) {
 		// TODO Auto-generated method stub
-		userDal.add(user);
+		postDal.add(post);
 	}
 
 	@Override
 	@Transactional
-	public void update(User user) {
+	public void update(Post post) {
 		// TODO Auto-generated method stub
-		userDal.update(user);
+		postDal.update(post);
 	}
 
 	@Override
 	@Transactional
-	public void delete(User user) {
+	public void delete(Post post) {
 		// TODO Auto-generated method stub
-		userDal.delete(user);
+		postDal.delete(post);
 	}
+
 }

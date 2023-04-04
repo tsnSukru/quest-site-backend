@@ -12,18 +12,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "comment")
+@Table(name = "post_like")
 @Data
-public class Comment {
+public class PostLike {
 	@Id
-	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -38,17 +37,12 @@ public class Comment {
 	@JsonIgnore
 	User user;
 
-	@Lob // buyuk objeleri kabul etmesi icin
-	@Column(columnDefinition = "text")
-	String text;
-
-	public Comment(Long id, Long postId, Long userId, String text) {
+	public PostLike(Long id, Long postId, Long userId) {
 		super();
 		this.id = id;
-		this.text = text;
 	}
 
-	public Comment() {
+	public PostLike() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -58,13 +52,5 @@ public class Comment {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
 	}
 }
