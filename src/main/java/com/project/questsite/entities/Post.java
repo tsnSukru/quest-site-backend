@@ -39,11 +39,19 @@ public class Post {
 	@Column(columnDefinition = "text") // hibernate sql de string olarak alması icin. Yazmazsak varchar(255) alır
 	String text;
 
-	public Post(Long id, Long userId, String title, String text) {
+	public Post(Long id, String title, String text) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.text = text;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Post() {

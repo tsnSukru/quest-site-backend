@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.questsite.bussines.IPostService;
 import com.project.questsite.entities.Post;
+import com.project.questsite.request.PostCreateRequest;
+import com.project.questsite.request.PostDeleteRequest;
+import com.project.questsite.request.PostUpdateRequest;
 
 @RestController
 @RequestMapping("/postApi")
@@ -29,23 +32,28 @@ public class PostController {
 		return postService.getAll();
 	}
 
+	@GetMapping("/posts/user/{userid}")
+	public List<Post> getByUserId(@PathVariable Long userid) {
+		return postService.getByUserId(userid);
+	}
+
 	@GetMapping("/posts/{id}")
-	public Post getById(@PathVariable long id) {
+	public Post getById(@PathVariable Long id) {
 		return postService.getById(id);
 	}
 
 	@PostMapping("/add")
-	public void add(@RequestBody Post post) {
-		postService.add(null);
+	public void add(@RequestBody PostCreateRequest postCreateRequest) {
+		postService.add(postCreateRequest);
 	}
 
 	@PostMapping("/update")
-	public void update(@RequestBody Post post) {
-		postService.update(post);
+	public void update(@RequestBody PostUpdateRequest postUpdateRequest) {
+		postService.update(postUpdateRequest);
 	}
 
 	@PostMapping("/delete")
-	public void delete(@RequestBody Post post) {
-		postService.delete(post);
+	public void delete(@RequestBody PostDeleteRequest postDeleteRequest) {
+		postService.delete(postDeleteRequest);
 	}
 }

@@ -33,6 +33,16 @@ public class PostDal implements IPostDal {
 
 	@Override
 	@Transactional
+	public List<Post> getByUserId(Long userId) {
+		// TODO Auto-generated method stub
+		Session session = entityManager.unwrap(Session.class);
+		List<Post> posts = session.createQuery("from Post as E where E.user.id = " + userId, Post.class)
+				.getResultList();
+		return posts;
+	}
+
+	@Override
+	@Transactional
 	public Post getById(Long id) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
@@ -49,6 +59,7 @@ public class PostDal implements IPostDal {
 	}
 
 	@Override
+	@Transactional
 	public void update(Post post) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
@@ -56,6 +67,7 @@ public class PostDal implements IPostDal {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Post post) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
