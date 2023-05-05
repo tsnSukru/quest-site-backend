@@ -22,7 +22,7 @@ import lombok.Data;
 @Data
 public class Comment {
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
@@ -66,5 +66,21 @@ public class Comment {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
