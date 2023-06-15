@@ -18,4 +18,4 @@ React: A JavaScript library for building user interfaces.
 Acknowledgements
 I would like to express my gratitude to Dilruba Köse for the inspiration and guidance provided through her YouTube channel.
 
-Feel free to reach out to me if you have any questions, suggestions, or feedback.
+Feel free to reach out to me if you have any questions, suggestions, or feedback...
