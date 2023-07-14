@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.questsite.bussines.IPostService;
-import com.project.questsite.entities.Post;
-import com.project.questsite.request.PostCreateRequest;
-import com.project.questsite.request.PostDeleteRequest;
-import com.project.questsite.request.PostUpdateRequest;
+import com.project.questsite.requests.PostCreateRequest;
+import com.project.questsite.requests.PostDeleteRequest;
+import com.project.questsite.requests.PostUpdateRequest;
+import com.project.questsite.responses.PostResponse;
 
 @RestController
 @RequestMapping("/postApi")
@@ -28,17 +28,17 @@ public class PostController {
 	}
 
 	@GetMapping("/posts")
-	public List<Post> getAll() {
+	public List<PostResponse> getAll() {
 		return postService.getAll();
 	}
 
 	@GetMapping("/posts/user/{userid}")
-	public List<Post> getByUserId(@PathVariable Long userid) {
+	public List<PostResponse> getByUserId(@PathVariable Long userid) {
 		return postService.getByUserId(userid);
 	}
 
 	@GetMapping("/posts/{id}")
-	public Post getById(@PathVariable Long id) {
+	public PostResponse getById(@PathVariable Long id) {
 		return postService.getById(id);
 	}
 

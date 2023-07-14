@@ -1,9 +1,9 @@
 package com.project.questsite.entities;
 
+import java.util.Date;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +15,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
@@ -26,18 +28,22 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY) // postu db'den cektigimizde user'ida cekmesin
+	@ManyToOne(fetch = FetchType.EAGER) // postu db'den cektigimizde user'ida cekmesin
 	@JoinColumn(name = "user_id", nullable = false) // iliskili kolon
 	@OnDelete(action = OnDeleteAction.CASCADE) // user silindiginde postlarida silinsin
-	@JsonIgnore
 	User user;
 
 	@Column(name = "title")
 	String title;
 
 	@Lob
-	@Column(columnDefinition = "text") // hibernate sql de string olarak alması icin. Yazmazsak varchar(255) alır
+	@Column(name = "text", columnDefinition = "text") // hibernate sql de string olarak alması icin. Yazmazsak
+														// varchar(255) alır
 	String text;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_date")
+	Date createDate;
 
 	public Post(Long id, String title, String text) {
 		super();
@@ -80,5 +86,13 @@ public class Post {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 }

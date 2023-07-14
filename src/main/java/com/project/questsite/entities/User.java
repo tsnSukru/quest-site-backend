@@ -21,9 +21,10 @@ public class User {
 	String userName;
 	@Column(name = "password")
 	String password;
+	@Column(name = "avatar")
+	int avatar;
 
 	public User(Long id, String userName, String password) {
-		super();
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
@@ -55,5 +56,13 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public int getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(int avatar) {
+		this.avatar = avatar;
 	}
 }

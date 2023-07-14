@@ -1,5 +1,6 @@
 package com.project.questsite.bussines;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,26 +8,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.questsite.dataAccess.ICommentDal;
+import com.project.questsite.dataAccess.IPostDal;
 import com.project.questsite.entities.Comment;
 import com.project.questsite.entities.Post;
 import com.project.questsite.entities.User;
-import com.project.questsite.request.CommentCreateRequest;
-import com.project.questsite.request.CommentDeleteRequest;
-import com.project.questsite.request.CommentUpdateRequest;
+import com.project.questsite.requests.CommentCreateRequest;
+import com.project.questsite.requests.CommentDeleteRequest;
+import com.project.questsite.requests.CommentUpdateRequest;
 
 @Service
 public class CommentManager implements ICommentService {
 
 	ICommentDal commentDal;
 	IUserService userManager;
-	IPostService postManager;
+	IPostDal postDal;
 
 	@Autowired
-	public CommentManager(ICommentDal commentDal, IUserService userManager, IPostService postManager) {
+	public CommentManager(ICommentDal commentDal, IUserService userManager, IPostDal postDal) {
 		// TODO Auto-generated constructor stub
 		this.commentDal = commentDal;
 		this.userManager = userManager;
-		this.postManager = postManager;
+		this.postDal = postDal;
 	}
 
 	@Override
@@ -48,7 +50,7 @@ public class CommentManager implements ICommentService {
 	public void add(CommentCreateRequest commentCreateRequest) {
 		// TODO Auto-generated method stub
 		User user = userManager.getById(commentCreateRequest.userId);
-		Post post = postManager.getById(commentCreateRequest.postId);
+		Post post = postDal.getById(commentCreateRequest.postId);
 		if (user == null || post == null) {
 			System.out.println("Post ya da kullanici yok");
 		} else {
@@ -57,6 +59,7 @@ public class CommentManager implements ICommentService {
 			comment.setUser(user);
 			comment.setPost(post);
 			comment.setText(commentCreateRequest.text);
+			comment.setCreateDate(new Date());
 			commentDal.add(comment);
 		}
 

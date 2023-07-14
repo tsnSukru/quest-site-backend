@@ -1,4 +1,4 @@
-package com.project.questsite.request;
+package com.project.questsite.requests;
 
 public class CommentCreateRequest {
 	public Long id;

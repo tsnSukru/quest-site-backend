@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.questsite.bussines.ICommentService;
 import com.project.questsite.entities.Comment;
-import com.project.questsite.request.CommentCreateRequest;
-import com.project.questsite.request.CommentDeleteRequest;
-import com.project.questsite.request.CommentUpdateRequest;
+import com.project.questsite.requests.CommentCreateRequest;
+import com.project.questsite.requests.CommentDeleteRequest;
+import com.project.questsite.requests.CommentUpdateRequest;
 
 @RestController
 @RequestMapping("/commentApi")

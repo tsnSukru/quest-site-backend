@@ -1,4 +1,4 @@
-package com.project.questsite.request;
+package com.project.questsite.requests;
 
 public class CommentUpdateRequest {
 	public Long id;

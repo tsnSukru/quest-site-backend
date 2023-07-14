@@ -2,17 +2,17 @@ package com.project.questsite.bussines;
 
 import java.util.List;
 
-import com.project.questsite.entities.Post;
-import com.project.questsite.request.PostCreateRequest;
-import com.project.questsite.request.PostDeleteRequest;
-import com.project.questsite.request.PostUpdateRequest;
+import com.project.questsite.requests.PostCreateRequest;
+import com.project.questsite.requests.PostDeleteRequest;
+import com.project.questsite.requests.PostUpdateRequest;
+import com.project.questsite.responses.PostResponse;
 
 public interface IPostService {
-	List<Post> getAll();
+	List<PostResponse> getAll();
 
-	Post getById(Long id);
+	PostResponse getById(Long id);
 
-	List<Post> getByUserId(Long userId);
+	List<PostResponse> getByUserId(Long userId);
 
 	String add(PostCreateRequest postCreateRequest);
 

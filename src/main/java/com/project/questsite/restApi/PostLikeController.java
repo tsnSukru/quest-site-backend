@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.questsite.bussines.IPostLikeService;
-import com.project.questsite.entities.PostLike;
-import com.project.questsite.request.PostLikeCreateRequest;
-import com.project.questsite.request.PostLikeDeleteRequest;
+import com.project.questsite.requests.PostLikeCreateRequest;
+import com.project.questsite.requests.PostLikeDeleteRequest;
+import com.project.questsite.responses.PostLikeResponse;
 
 @RestController
 @RequestMapping("/postLikeApi")
@@ -30,7 +30,7 @@ public class PostLikeController {
 
 	@GetMapping("/postLikes/{postId}")
 	@Transactional
-	public List<PostLike> getAll(@PathVariable Long postId) {
+	public List<PostLikeResponse> getAll(@PathVariable Long postId) {
 		return postLikeService.getAll(postId);
 	}
 

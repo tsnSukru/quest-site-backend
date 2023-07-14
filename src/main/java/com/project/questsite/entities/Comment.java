@@ -1,5 +1,7 @@
 package com.project.questsite.entities;
 
+import java.util.Date;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -15,6 +17,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
@@ -39,8 +43,12 @@ public class Comment {
 	User user;
 
 	@Lob // buyuk objeleri kabul etmesi icin
-	@Column(columnDefinition = "text")
+	@Column(name = "text", columnDefinition = "text")
 	String text;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_date")
+	Date createDate;
 
 	public Comment(Long id, Long postId, Long userId, String text) {
 		super();
@@ -82,5 +90,13 @@ public class Comment {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 }

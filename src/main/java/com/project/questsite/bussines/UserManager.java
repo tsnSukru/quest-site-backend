@@ -36,6 +36,13 @@ public class UserManager implements IUserService {
 
 	@Override
 	@Transactional
+	public User getByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return userDal.getByUserName(userName);
+	}
+
+	@Override
+	@Transactional
 	public void add(User user) {
 		// TODO Auto-generated method stub
 		userDal.add(user);
@@ -54,4 +61,5 @@ public class UserManager implements IUserService {
 		// TODO Auto-generated method stub
 		userDal.delete(user);
 	}
+
 }

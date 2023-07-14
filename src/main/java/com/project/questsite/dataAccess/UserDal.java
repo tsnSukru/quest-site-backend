@@ -3,6 +3,7 @@ package com.project.questsite.dataAccess;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +33,7 @@ public class UserDal implements IUserDal {
 	}
 
 	@Override
+	@Transactional
 	public User getById(Long id) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
@@ -40,6 +42,18 @@ public class UserDal implements IUserDal {
 	}
 
 	@Override
+	@Transactional
+	public User getByUserName(String userName) {
+		// TODO Auto-generated method stub
+		Session session = entityManager.unwrap(Session.class);
+		Query query = session.createQuery("from User as u where u.userName = :username", User.class);
+		query.setParameter("username", userName);
+		User user = (User) query.uniqueResult();
+		return user;
+	}
+
+	@Override
+	@Transactional
 	public void add(User user) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
@@ -47,6 +61,7 @@ public class UserDal implements IUserDal {
 	}
 
 	@Override
+	@Transactional
 	public void update(User user) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
@@ -54,11 +69,11 @@ public class UserDal implements IUserDal {
 	}
 
 	@Override
+	@Transactional
 	public void delete(User user) {
 		// TODO Auto-generated method stub
 		Session session = entityManager.unwrap(Session.class);
 		User userToDelete = session.get(User.class, user.getId());
 		session.remove(userToDelete);
 	}
-
 }

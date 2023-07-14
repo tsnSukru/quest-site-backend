@@ -1,6 +1,8 @@
 package com.project.questsite.bussines;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,42 +11,52 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.questsite.dataAccess.IPostDal;
 import com.project.questsite.entities.Post;
 import com.project.questsite.entities.User;
-import com.project.questsite.request.PostCreateRequest;
-import com.project.questsite.request.PostDeleteRequest;
-import com.project.questsite.request.PostUpdateRequest;
+import com.project.questsite.requests.PostCreateRequest;
+import com.project.questsite.requests.PostDeleteRequest;
+import com.project.questsite.requests.PostUpdateRequest;
+import com.project.questsite.responses.PostLikeResponse;
+import com.project.questsite.responses.PostResponse;
 
 @Service
 public class PostManager implements IPostService {
 
 	IPostDal postDal;
+	IPostLikeService postLikeService;
 	IUserService userManager;
 
 	@Autowired
-	public PostManager(IPostDal postDal, IUserService userManager) {
+	public PostManager(IPostDal postDal, IPostLikeService postLikeService, IUserService userManager) {
 		// TODO Auto-generated constructor stub
 		this.postDal = postDal;
+		this.postLikeService = postLikeService;
 		this.userManager = userManager;
 	}
 
 	@Override
 	@Transactional
-	public List<Post> getAll() {
+	public List<PostResponse> getAll() {
 		// TODO Auto-generated method stub
-		return postDal.getAll();
+		List<Post> posts = postDal.getAll();
+		return posts.stream().map(p -> {
+			List<PostLikeResponse> postLikeResponses = postLikeService.getAll(p.getId());
+			return new PostResponse(p, postLikeResponses);
+		}).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
-	public List<Post> getByUserId(Long userId) {
+	public List<PostResponse> getByUserId(Long userId) {
 		// TODO Auto-generated method stub
-		return postDal.getByUserId(userId);
+		List<Post> posts = postDal.getAll();
+		return posts.stream().map(p -> new PostResponse(p)).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
-	public Post getById(Long id) {
+	public PostResponse getById(Long id) {
 		// TODO Auto-generated method stub
-		return postDal.getById(id);
+		PostResponse postResponse = new PostResponse(postDal.getById(id));
+		return postResponse;
 	}
 
 	@Override
@@ -56,10 +68,10 @@ public class PostManager implements IPostService {
 			return "Kullanici yok";
 		}
 		Post post = new Post();
-		post.setId(postCreateRequest.id);
 		post.setText(postCreateRequest.text);
 		post.setTitle(postCreateRequest.title);
 		post.setUser(user);
+		post.setCreateDate(new Date());
 		postDal.add(post);
 		return "Post Eklendi";
 	}
