@@ -14,6 +14,7 @@ Hibernate: An object-relational mapping (ORM) library for database management.
 Frontend:
 
 React: A JavaScript library for building user interfaces.
+Uploaded as another repository in my profile.
 
 Acknowledgements
 I would like to express my gratitude to Dilruba Köse for the inspiration and guidance provided through her YouTube channel.
