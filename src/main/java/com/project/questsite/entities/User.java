@@ -24,10 +24,11 @@ public class User {
 	@Column(name = "avatar")
 	int avatar;
 
-	public User(Long id, String userName, String password) {
+	public User(Long id, String userName, String password, int avatar) {
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
+		this.avatar = avatar;
 	}
 
 	public User() {

@@ -45,11 +45,44 @@ public class Post {
 	@Column(name = "create_date")
 	Date createDate;
 
-	public Post(Long id, String title, String text) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.text = text;
+	private Post() {
+
+	}
+
+	public static class Builder {
+		private User user;
+		private String title;
+		private String text;
+		private Date createDate;
+
+		public Builder setUser(User user) {
+			this.user = user;
+			return this;
+		}
+
+		public Builder setTitle(String title) {
+			this.title = title;
+			return this;
+		}
+
+		public Builder setText(String text) {
+			this.text = text;
+			return this;
+		}
+
+		public Builder setCreateDate(Date createDate) {
+			this.createDate = createDate;
+			return this;
+		}
+
+		public Post build() {
+			Post post = new Post();
+			post.user = this.user;
+			post.title = this.title;
+			post.text = this.text;
+			post.createDate = this.createDate;
+			return post;
+		}
 	}
 
 	public User getUser() {
@@ -58,10 +91,6 @@ public class Post {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Post() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {

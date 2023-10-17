@@ -67,11 +67,8 @@ public class PostManager implements IPostService {
 		if (user == null) {
 			return "Kullanici yok";
 		}
-		Post post = new Post();
-		post.setText(postCreateRequest.text);
-		post.setTitle(postCreateRequest.title);
-		post.setUser(user);
-		post.setCreateDate(new Date());
+		Post post = new Post.Builder().setUser(user).setText(postCreateRequest.text).setTitle(postCreateRequest.title)
+				.setCreateDate(new Date()).build();
 		postDal.add(post);
 		return "Post Eklendi";
 	}
@@ -84,6 +81,7 @@ public class PostManager implements IPostService {
 		if (post == null) {
 			return "Post yok";
 		}
+
 		post.setText(postUpdateRequest.text);
 		post.setTitle(postUpdateRequest.title);
 		postDal.update(post);
