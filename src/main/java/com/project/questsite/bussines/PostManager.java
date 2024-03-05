@@ -65,7 +65,7 @@ public class PostManager implements IPostService {
 		// TODO Auto-generated method stub
 		User user = userManager.getById(postCreateRequest.userId);
 		if (user == null) {
-			return "Kullanici yok";
+			return "There is no user with this id";
 		}
 		Post post = new Post.Builder().setUser(user).setText(postCreateRequest.text).setTitle(postCreateRequest.title)
 				.setCreateDate(new Date()).build();

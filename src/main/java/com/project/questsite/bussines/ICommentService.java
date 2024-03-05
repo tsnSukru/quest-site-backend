@@ -6,9 +6,10 @@ import com.project.questsite.entities.Comment;
 import com.project.questsite.requests.CommentCreateRequest;
 import com.project.questsite.requests.CommentDeleteRequest;
 import com.project.questsite.requests.CommentUpdateRequest;
+import com.project.questsite.responses.CommentResponse;
 
 public interface ICommentService {
-	List<Comment> getAll(Long postId);
+	List<CommentResponse> getAll(Long postId);
 
 	Comment getById(Long id);
 

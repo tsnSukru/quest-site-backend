@@ -73,7 +73,8 @@ public class SecurityConfig {
 				.authorizeHttpRequests().requestMatchers(HttpMethod.GET, "/postApi/posts").permitAll()
 				.requestMatchers(HttpMethod.GET, "/commentApi/comments/{postId}").permitAll()
 				.requestMatchers(HttpMethod.GET, "/postLikeApi/postLikes/{postId}").permitAll()
-				.requestMatchers("/authentication/**").permitAll().anyRequest().authenticated();
+				.requestMatchers("/authentication/**").permitAll()
+				.anyRequest().authenticated();
 
 		httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		return httpSecurity.build();

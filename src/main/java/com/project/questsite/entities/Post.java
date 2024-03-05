@@ -45,7 +45,7 @@ public class Post {
 	@Column(name = "create_date")
 	Date createDate;
 
-	private Post() {
+	public Post() {
 
 	}
 

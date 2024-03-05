@@ -16,6 +16,7 @@ import com.project.questsite.entities.Comment;
 import com.project.questsite.requests.CommentCreateRequest;
 import com.project.questsite.requests.CommentDeleteRequest;
 import com.project.questsite.requests.CommentUpdateRequest;
+import com.project.questsite.responses.CommentResponse;
 
 @RestController
 @RequestMapping("/commentApi")
@@ -30,7 +31,7 @@ public class CommentController {
 
 	@GetMapping("/comments/{postId}")
 	@Transactional
-	public List<Comment> getAll(@PathVariable Long postId) {
+	public List<CommentResponse> getAll(@PathVariable Long postId) {
 		return commentService.getAll(postId);
 	}
 

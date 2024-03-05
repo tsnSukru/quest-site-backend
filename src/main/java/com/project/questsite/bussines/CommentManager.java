@@ -2,6 +2,8 @@ package com.project.questsite.bussines;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import com.project.questsite.entities.User;
 import com.project.questsite.requests.CommentCreateRequest;
 import com.project.questsite.requests.CommentDeleteRequest;
 import com.project.questsite.requests.CommentUpdateRequest;
+import com.project.questsite.responses.CommentResponse;
 
 @Service
 public class CommentManager implements ICommentService {
@@ -33,9 +36,13 @@ public class CommentManager implements ICommentService {
 
 	@Override
 	@Transactional
-	public List<Comment> getAll(Long postId) {
+	public List<CommentResponse> getAll(Long postId) {
 		// TODO Auto-generated method stub
-		return commentDal.getAll(postId);
+		List<Comment> comments = commentDal.getAll(postId);
+	    List<CommentResponse> commentResponses = comments.stream().map(comment -> new CommentResponse(comment.getId(), comment.getText(),
+	    		comment.getCreateDate(),comment.getPost().getId(),comment.getUser().getId(),comment.getUser().getUserName(),comment.getUser().getAvatar()
+	    		)).collect(Collectors.toList());
+		return commentResponses;
 	}
 
 	@Override
@@ -55,7 +62,6 @@ public class CommentManager implements ICommentService {
 			System.out.println("Post ya da kullanici yok");
 		} else {
 			Comment comment = new Comment();
-			comment.setId(commentCreateRequest.id);
 			comment.setUser(user);
 			comment.setPost(post);
 			comment.setText(commentCreateRequest.text);
